@@ -16,6 +16,8 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private int bonusLimit;
     [SerializeField]
+    private int hiddenBalls;
+    [SerializeField]
     private float bonusSpawnTime;
     [SerializeField]
     private GameObject ball;
@@ -82,6 +84,7 @@ public class Manager : MonoBehaviour {
             clone.GetComponent<Rigidbody>().AddForce(Vector3.up * fireForceMultiplier);
             yield return new WaitForSeconds(shotCooldown/3 );
         }
+        bonusLimit = 0;
     }
     public IEnumerator Fire()
     {
@@ -132,8 +135,17 @@ public class Manager : MonoBehaviour {
     {
         total += points;
     }
-    public void Upkeep(int balls, int max = 2)
+    public void Reward(int max = 2)
     {
-
+        hiddenBalls++;
+        if(hiddenBalls >= max)
+        {
+            hiddenBalls = 0;
+            bonusLimit++;
+        }
+    }
+    public void Upkeep()
+    {
+        Balls++;
     }
 }

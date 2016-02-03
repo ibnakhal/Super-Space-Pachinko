@@ -28,7 +28,7 @@ public class Endgame : MonoBehaviour {
 	
 	}
 
-    public void OnTriggerEnter()
+    public void OnTriggerEnter(Collider Other)
     {
         switch (eGType)
         {
@@ -36,14 +36,16 @@ public class Endgame : MonoBehaviour {
                 keep.Intake(pointValue);
                 break;
             case EndGameType.Bonus:
-                keep = Manager.GetComponent<Manager>();
+                keep.Reward();
                 break;
             case EndGameType.BallAdder:
-                keep = Manager.GetComponent<Manager>();
+                keep.Upkeep();
                 break;
 
 
         }
+
+        Destroy(Other.gameObject, 1);
 
     }
 }
