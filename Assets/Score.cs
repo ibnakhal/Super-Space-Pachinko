@@ -4,8 +4,7 @@ using System.Collections;
 public class Score : MonoBehaviour {
 
     // Use this for initialization
-    [SerializeField]
-    private int total;
+
 
 	void Start () {
 	
@@ -16,8 +15,5 @@ public class Score : MonoBehaviour {
 	
 	}
 
-    public void Intake(int points)
-    {
-        total += points;
-    }
+
 }

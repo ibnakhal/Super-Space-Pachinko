@@ -33,26 +33,32 @@ public class Manager : MonoBehaviour {
     private float forceChange;
     [SerializeField]
     private float forceChangeTime;
-        
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private int total;
+
+    // Use this for initialization
+    void Start () {
         StartCoroutine(Up());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(Input.GetButtonDown("Jump") && !fired)
+        if(Input.GetButtonDown("Jump") && !fired && Balls > 0)
         {
-            Fire();
+            Debug.Log("ShotsFired");
+            StartCoroutine(Fire());
         }
         if (Input.GetButtonDown("Fire1") && BonusShots)
         {
             StartCoroutine(LetLoose());
         }
 
-        
 
+        if (Input.GetButtonDown("Fire2") && BonusShots)
+        {
+            StartCoroutine(Flood());
+        }
 
 
     }
@@ -67,13 +73,25 @@ public class Manager : MonoBehaviour {
             Instantiate(ball, spaceShip.position, spaceShip.rotation);
         }
     }
+    public IEnumerator Flood()
+    {
+        for (int x = 0; x < bonusLimit; x++)
+        {
+            yield return new WaitForSeconds(bonusSpawnTime);
+            GameObject clone = Instantiate(ball, spawnLocation.position, spawnLocation.rotation) as GameObject;
+            clone.GetComponent<Rigidbody>().AddForce(Vector3.up * fireForceMultiplier);
+            yield return new WaitForSeconds(shotCooldown/3 );
+        }
+    }
     public IEnumerator Fire()
     {
         fired = true;
+        Balls--;
         GameObject clone = Instantiate(ball, spawnLocation.position, spawnLocation.rotation) as GameObject;
         clone.GetComponent<Rigidbody>().AddForce(Vector3.up * fireForceMultiplier);
         yield return new WaitForSeconds(shotCooldown);
         fired = false;
+        Debug.Log("Fire Close Loop");
     }
 
     public void ShipsActive()
@@ -109,4 +127,13 @@ public class Manager : MonoBehaviour {
         }
     }
 
+
+    public void Intake(int points)
+    {
+        total += points;
+    }
+    public void Upkeep(int balls, int max = 2)
+    {
+
+    }
 }
