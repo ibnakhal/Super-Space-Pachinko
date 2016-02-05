@@ -62,8 +62,10 @@
   <ItemGroup>
     <Compile Include="Assets\Endgame.cs" />
     <Compile Include="Assets\Manager.cs" />
+    <Compile Include="Assets\NoiseMaker.cs" />
     <Compile Include="Assets\Rotation.cs" />
     <Compile Include="Assets\Score.cs" />
+    <Compile Include="Assets\ShipMovement.cs" />
     <Compile Include="Assets\Teleporter.cs" />
     <Compile Include="Assets\spawnball.cs" />
   </ItemGroup>
