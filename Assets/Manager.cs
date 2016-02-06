@@ -37,6 +37,8 @@ public class Manager : MonoBehaviour {
     private float forceChangeTime;
     [SerializeField]
     private int total;
+    [SerializeField]
+    private AudioSource shipSource;
 
     // Use this for initialization
     void Start () {
@@ -53,12 +55,14 @@ public class Manager : MonoBehaviour {
         }
         if (Input.GetButtonDown("Fire1") && BonusShots)
         {
+            BonusShots = false;
             StartCoroutine(LetLoose());
         }
 
 
         if (Input.GetButtonDown("Fire2") && BonusShots)
         {
+            BonusShots = false;
             StartCoroutine(Flood());
         }
 
@@ -69,22 +73,28 @@ public class Manager : MonoBehaviour {
 
     public IEnumerator LetLoose()
     {
+        shipSource.Play();
+        yield return new WaitForSeconds(shipSource.clip.length - 2.5f);
         for(int x= 0; x< bonusLimit; x++)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
             Instantiate(ball, spaceShip.position, spaceShip.rotation);
         }
+            BonusShots = true;
     }
     public IEnumerator Flood()
     {
+        shipSource.Play();
+        yield return new WaitForSeconds(shipSource.clip.length - 2.5f);
         for (int x = 0; x < bonusLimit; x++)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
             GameObject clone = Instantiate(ball, spawnLocation.position, spawnLocation.rotation) as GameObject;
             clone.GetComponent<Rigidbody>().AddForce(Vector3.up * fireForceMultiplier);
-            yield return new WaitForSeconds(shotCooldown/3 );
+            yield return new WaitForSeconds(shotCooldown / 3);
         }
         bonusLimit = 0;
+        BonusShots = true;
     }
     public IEnumerator Fire()
     {
