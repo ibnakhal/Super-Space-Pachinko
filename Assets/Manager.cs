@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Manager : MonoBehaviour {
 
     [SerializeField]
@@ -15,6 +15,8 @@ public class Manager : MonoBehaviour {
     private Transform spawnLocation;
     [SerializeField]
     private int bonusLimit;
+    [SerializeField]
+    private int bonusUIInt;
     [SerializeField]
     private int hiddenBalls;
     [SerializeField]
@@ -39,6 +41,15 @@ public class Manager : MonoBehaviour {
     private int total;
     [SerializeField]
     private AudioSource shipSource;
+    [SerializeField]
+    private Text powerText;
+    [SerializeField]
+    private Text ballText;
+    [SerializeField]
+    private Text bonusText;
+    [SerializeField]
+    private Text pointText;
+
 
     // Use this for initialization
     void Start () {
@@ -65,7 +76,10 @@ public class Manager : MonoBehaviour {
             BonusShots = false;
             StartCoroutine(Flood());
         }
-
+        powerText.text = ("Power: " + fireForceMultiplier);
+        ballText.text = ("Balls: " + Balls);
+        bonusText.text = ("Bonus Balls: " + bonusLimit);
+        pointText.text = ("Points: " + total);
 
     }
 
@@ -75,7 +89,7 @@ public class Manager : MonoBehaviour {
     {
         shipSource.Play();
         yield return new WaitForSeconds(shipSource.clip.length - 2.5f);
-        for(int x= 0; x< bonusLimit; x++)
+        for(int x= 0; x< bonusLimit; bonusLimit--)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
             Instantiate(ball, spaceShip.position, spaceShip.rotation);
@@ -86,7 +100,7 @@ public class Manager : MonoBehaviour {
     {
         shipSource.Play();
         yield return new WaitForSeconds(shipSource.clip.length - 2.5f);
-        for (int x = 0; x < bonusLimit; x++)
+        for (int x = 0; x < bonusLimit; bonusLimit--)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
             GameObject clone = Instantiate(ball, spawnLocation.position, spawnLocation.rotation) as GameObject;
