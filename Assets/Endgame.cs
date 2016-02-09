@@ -36,10 +36,10 @@ public class Endgame : MonoBehaviour {
                 keep.Intake(pointValue);
                 break;
             case EndGameType.Bonus:
-                keep.Reward();
+                keep.Reward(pointValue);
                 break;
             case EndGameType.BallAdder:
-                keep.Upkeep();
+                keep.Upkeep(pointValue);
                 break;
 
 

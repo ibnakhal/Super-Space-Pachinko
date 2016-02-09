@@ -159,7 +159,7 @@ public class Manager : MonoBehaviour {
     {
         total += points;
     }
-    public void Reward(int max = 2)
+    public void Reward(int max)
     {
         hiddenBalls++;
         if(hiddenBalls >= max)
@@ -168,8 +168,8 @@ public class Manager : MonoBehaviour {
             bonusLimit++;
         }
     }
-    public void Upkeep()
+    public void Upkeep(int addition)
     {
-        Balls++;
+        Balls+= addition;
     }
 }
