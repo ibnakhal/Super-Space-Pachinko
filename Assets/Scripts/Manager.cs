@@ -14,7 +14,7 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private Transform spawnLocation;
     [SerializeField]
-    private int bonusLimit;
+    public int bonusLimit;
     [SerializeField]
     private int bonusUIInt;
     [SerializeField]

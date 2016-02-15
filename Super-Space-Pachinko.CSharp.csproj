@@ -73,14 +73,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Endgame.cs" />
-    <Compile Include="Assets\Manager.cs" />
-    <Compile Include="Assets\NoiseMaker.cs" />
-    <Compile Include="Assets\Rotation.cs" />
-    <Compile Include="Assets\Score.cs" />
-    <Compile Include="Assets\ShipMovement.cs" />
-    <Compile Include="Assets\Teleporter.cs" />
-    <Compile Include="Assets\spawnball.cs" />
+    <Compile Include="Assets\Scripts\Endgame.cs" />
+    <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\NoiseMaker.cs" />
+    <Compile Include="Assets\Scripts\Rotation.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Scripts\ShipMovement.cs" />
+    <Compile Include="Assets\Scripts\SpaceBar.cs" />
+    <Compile Include="Assets\Scripts\Teleporter.cs" />
+    <Compile Include="Assets\Scripts\spawnball.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
