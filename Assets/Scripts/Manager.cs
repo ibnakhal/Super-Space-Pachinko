@@ -71,6 +71,7 @@ public class Manager : MonoBehaviour {
         {
             Debug.Log("Game Over");
             endText.gameObject.SetActive(true);
+            StartCoroutine(Endgame());
         }
         if(Input.GetButtonDown("Jump") && !fired && Balls > 0)
         {
@@ -99,6 +100,7 @@ public class Manager : MonoBehaviour {
     public IEnumerator Endgame()
     {
         yield return new WaitForSeconds(5);
+        Destroy(GameObject.FindGameObjectWithTag("Music"));
         Application.LoadLevel(0);
     }
 

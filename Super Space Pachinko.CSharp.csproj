@@ -55,25 +55,31 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Endgame.cs" />
-    <Compile Include="Assets\Manager.cs" />
-    <Compile Include="Assets\NoiseMaker.cs" />
-    <Compile Include="Assets\Rotation.cs" />
-    <Compile Include="Assets\Score.cs" />
-    <Compile Include="Assets\ShipMovement.cs" />
-    <Compile Include="Assets\Teleporter.cs" />
-    <Compile Include="Assets\spawnball.cs" />
+    <Compile Include="Assets\Scripts\AnimPlayer.cs" />
+    <Compile Include="Assets\Scripts\Blinker.cs" />
+    <Compile Include="Assets\Scripts\Button.cs" />
+    <Compile Include="Assets\Scripts\DontDestroy.cs" />
+    <Compile Include="Assets\Scripts\Endgame.cs" />
+    <Compile Include="Assets\Scripts\LookDirection.cs" />
+    <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\NoiseMaker.cs" />
+    <Compile Include="Assets\Scripts\Rotation.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Scripts\ShipMovement.cs" />
+    <Compile Include="Assets\Scripts\SpaceBar.cs" />
+    <Compile Include="Assets\Scripts\Teleporter.cs" />
+    <Compile Include="Assets\Scripts\UI\CursorSetter.cs" />
+    <Compile Include="Assets\Scripts\UI\Ended.cs" />
+    <Compile Include="Assets\Scripts\UI\Fader.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\Pause.cs" />
+    <Compile Include="Assets\Scripts\UI\Wait.cs" />
+    <Compile Include="Assets\Scripts\spawnball.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
