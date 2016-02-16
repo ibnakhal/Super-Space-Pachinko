@@ -50,6 +50,9 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private Text pointText;
     [SerializeField]
+    private Text endText;
+
+    [SerializeField]
     private GameObject cig;
     [SerializeField]
     private Transform cigSpawn;
@@ -64,7 +67,11 @@ public class Manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (bonusLimit <= 0 && Balls <= 0 && GameObject.Find("ball(Clone)")==null && GameObject.Find("Meteor(Clone)") == null)
+        {
+            Debug.Log("Game Over");
+            endText.gameObject.SetActive(true);
+        }
         if(Input.GetButtonDown("Jump") && !fired && Balls > 0)
         {
             Debug.Log("ShotsFired");
@@ -89,7 +96,11 @@ public class Manager : MonoBehaviour {
 
     }
 
-
+    public IEnumerator Endgame()
+    {
+        yield return new WaitForSeconds(5);
+        Application.LoadLevel(0);
+    }
 
     public IEnumerator LetLoose()
     {

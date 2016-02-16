@@ -13,6 +13,15 @@ public class SpaceBar : MonoBehaviour
     private GameObject meteor;
     [SerializeField]
     private Manager management;
+    [SerializeField]
+    private AudioClip alert;
+    [SerializeField]
+    private AudioSource source;
+
+    public void Start()
+    {
+        source.clip = alert;
+    }
     public void OnTriggerEnter(Collider Other)
     {
         Destroy(Other.gameObject, 1);
@@ -27,6 +36,7 @@ public class SpaceBar : MonoBehaviour
 
     public IEnumerator Shower()
     {
+        source.Play();
         management = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
         for (int x = 0; x < management.bonusLimit; management.bonusLimit--)
         {
