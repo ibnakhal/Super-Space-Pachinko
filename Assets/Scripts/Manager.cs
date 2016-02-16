@@ -6,7 +6,7 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private bool BonusShots;
     [SerializeField]
-    private int Balls;
+    public int Balls;
     [SerializeField]
     private bool BonusTriggered;
     [SerializeField]
@@ -49,8 +49,14 @@ public class Manager : MonoBehaviour {
     private Text bonusText;
     [SerializeField]
     private Text pointText;
-
-
+    [SerializeField]
+    private GameObject cig;
+    [SerializeField]
+    private Transform cigSpawn;
+    [SerializeField]
+    private int threshold;
+    [SerializeField]
+    private int levelModifier;
     // Use this for initialization
     void Start () {
         StartCoroutine(Up());
@@ -158,15 +164,18 @@ public class Manager : MonoBehaviour {
     public void Intake(int points)
     {
         total += points;
-    }
-    public void Reward(int max)
-    {
-        hiddenBalls++;
-        if(hiddenBalls >= max)
+        if(total >= threshold)
         {
-            hiddenBalls = 0;
-            bonusLimit++;
+            Instantiate(cig, cigSpawn.position, cigSpawn.rotation);
+            threshold += levelModifier;
         }
+
+    }
+    public void Reward(int reward)
+    {
+
+        bonusLimit += reward;
+
     }
     public void Upkeep(int addition)
     {
