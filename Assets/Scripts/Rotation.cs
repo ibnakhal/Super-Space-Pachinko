@@ -4,6 +4,8 @@ using System.Collections;
 public class Rotation : MonoBehaviour {
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private Vector3 Axis;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,6 +13,6 @@ public class Rotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.Rotate(Vector3.right * Time.deltaTime * speed);
+        this.transform.Rotate(Axis * Time.deltaTime * speed);
 	}
 }

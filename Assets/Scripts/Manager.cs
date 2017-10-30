@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 public class Manager : MonoBehaviour {
-
+    [SerializeField]
+    private string levelName;
     [SerializeField]
     private bool BonusShots;
     [SerializeField]
@@ -24,11 +25,13 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private GameObject ball;
     [SerializeField]
+    private GameObject bonusBall;
+    [SerializeField]
     private float shotCooldown;
     [SerializeField]
     private bool fired;
     [SerializeField]
-    private float fireForceMultiplier;
+    public float fireForceMultiplier;
     [SerializeField]
     private float forceMax;
     [SerializeField]
@@ -41,8 +44,6 @@ public class Manager : MonoBehaviour {
     private int total;
     [SerializeField]
     private AudioSource shipSource;
-    [SerializeField]
-    private Text powerText;
     [SerializeField]
     private Text ballText;
     [SerializeField]
@@ -60,48 +61,52 @@ public class Manager : MonoBehaviour {
     private int threshold;
     [SerializeField]
     private int levelModifier;
+    [SerializeField]
+    private bool ending = true;
+
+
+    [SerializeField]
+    private PlayerPref pPref;
     // Use this for initialization
     void Start () {
         StartCoroutine(Up());
-	}
+        pPref = GameObject.FindGameObjectWithTag("Background").GetComponent<PlayerPref>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (bonusLimit <= 0 && Balls <= 0 && GameObject.Find("ball(Clone)")==null && GameObject.Find("Meteor(Clone)") == null)
+        if (bonusLimit <= 0 && Balls <= 0 && GameObject.Find("ball(Clone)")==null && GameObject.Find("Meteor(Clone)") == null && GameObject.Find("BonusBall(Clone)") == null && ending)
         {
+            ending = false;
             Debug.Log("Game Over");
             endText.gameObject.SetActive(true);
             StartCoroutine(Endgame());
         }
-        if(Input.GetButtonDown("Jump") && !fired && Balls > 0)
+        if(Input.GetMouseButtonDown(0) && !fired && Balls > 0)
         {
             Debug.Log("ShotsFired");
             StartCoroutine(Fire());
         }
-        if (Input.GetButtonDown("Fire1") && BonusShots)
+        if(bonusLimit<0)
         {
-            BonusShots = false;
-            StartCoroutine(LetLoose());
+            bonusLimit = 0;
         }
 
 
-        if (Input.GetButtonDown("Fire2") && BonusShots)
-        {
-            BonusShots = false;
-            StartCoroutine(Flood());
-        }
-        powerText.text = ("Power: " + fireForceMultiplier);
-        ballText.text = ("Balls: " + Balls);
-        bonusText.text = ("Bonus Balls: " + bonusLimit);
+        ballText.text = ( Balls.ToString());
+        bonusText.text = (bonusLimit.ToString());
         pointText.text = ("Points: " + total);
 
     }
 
     public IEnumerator Endgame()
     {
+        pPref.LeaderBoardUpdate(total, levelName);
+        pPref.LeaderBoardSave();
         yield return new WaitForSeconds(5);
         Destroy(GameObject.FindGameObjectWithTag("Music"));
-        Application.LoadLevel(0);
+        Application.LoadLevel(1);
     }
 
     public IEnumerator LetLoose()
@@ -111,7 +116,7 @@ public class Manager : MonoBehaviour {
         for(int x= 0; x< bonusLimit; bonusLimit--)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
-            Instantiate(ball, spaceShip.position, spaceShip.rotation);
+            Instantiate(bonusBall, spaceShip.position, spaceShip.rotation);
         }
             BonusShots = true;
     }
@@ -122,7 +127,7 @@ public class Manager : MonoBehaviour {
         for (int x = 0; x < bonusLimit; bonusLimit--)
         {
             yield return new WaitForSeconds(bonusSpawnTime);
-            GameObject clone = Instantiate(ball, spawnLocation.position, spawnLocation.rotation) as GameObject;
+            GameObject clone = Instantiate(bonusBall, spawnLocation.position, spawnLocation.rotation) as GameObject;
             clone.GetComponent<Rigidbody>().AddForce(Vector3.up * fireForceMultiplier);
             yield return new WaitForSeconds(shotCooldown / 3);
         }
@@ -193,5 +198,11 @@ public class Manager : MonoBehaviour {
     public void Upkeep(int addition)
     {
         Balls+= addition;
+    }
+
+    public void Launch()
+    {
+            BonusShots = false;
+            StartCoroutine(LetLoose());
     }
 }

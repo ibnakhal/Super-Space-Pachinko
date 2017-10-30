@@ -5,7 +5,15 @@ public class Button : MonoBehaviour {
 
     [SerializeField]
     private int levelToLoad;
-	void Start () {
+    [SerializeField]
+    private GameObject wakeUp;
+    [SerializeField]
+    private GameObject goSleep;
+    [SerializeField]
+    private Camera cam;
+    [SerializeField]
+    private Vector3 Look;
+    void Start () {
 	
 	}
 	
@@ -22,6 +30,12 @@ public class Button : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+    public void HS()
+    {
+        wakeUp.SetActive(true);
+        goSleep.SetActive(false);
+        cam.gameObject.transform.Rotate(Look);
     }
 
 }

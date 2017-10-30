@@ -45,7 +45,7 @@ public class Endgame : MonoBehaviour {
 
         }
 
-        Destroy(Other.gameObject, 1);
+        Destroy(Other.gameObject, 0.05f);
 
     }
 }
