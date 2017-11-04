@@ -15,4 +15,9 @@ public class Rotation : MonoBehaviour {
 	void Update () {
         this.transform.Rotate(Axis * Time.deltaTime * speed);
 	}
+
+    public void Flip()
+    {
+        Axis = -Axis;
+    }
 }
